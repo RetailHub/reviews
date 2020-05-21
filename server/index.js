@@ -6,6 +6,7 @@ const app = express();
 const PORT = 3004;
 
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 
 app.use(express.static(__dirname + "/../client/dist"));
 
@@ -36,4 +37,38 @@ console.log(req._parsedOriginalUrl.search);
       }
     });
   }
+});
+
+app.delete("/api/allreviews/", (req, res) => {
+  if (req.body.id) {
+    db.deleteReview(req.body.id, (err, data) => {
+      if (err) {
+        res.status(500).send("Something Broke!");
+      } else {
+        res.status(200).json(data);
+      }
+    });
+  }
+});
+
+app.post("/api/addReview/", (req, res) => {
+  db.createReview(req.body, (err, data) => {
+    console.log('This is the error --------', err)
+    if (err) {
+      res.status(500).send("Something Broke!");
+    } else {
+      res.status(200).json(data);
+    }
+  });
+});
+
+app.patch("/api/patchreview/", (req, res) => {
+  db.updateReview(req.body, (err, data) => {
+    console.log('This is the error --------', err)
+    if (err) {
+      res.status(500).send("Something Broke!");
+    } else {
+      res.status(200).json(data);
+    }
+  });
 });

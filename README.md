@@ -32,3 +32,33 @@ to run the tests: npm test
 to run the tests with a coverage report: npm test:coverage
 
 ========================================================================================================================================
+
+
+# Single Item Service
+This component renders the reviews to a product page
+
+## Getting Started
+```sh
+npm install
+```
+
+## Running the tests
+
+```sh
+npm run test
+```
+
+## Running server and client locally
+
+```sh
+npm start:dev
+npm run build
+```
+
+## CRUD Operations
+| HTTP Verb |           Endpoint          |            Action            |
+|-----------| --------------------------- | ---------------------------- |
+| **POST**  |     /api/addReview/         |  CREATE a new item into DB   |
+| **GET**   |     /api/allReviews/?={id}  |  READ data and return data   |
+| **PATCH** |     /api/allReviews/        |  UPDATE item with new image  |
+| **DELETE**|     /api/allReviews/        |  DELETE item based on ID     |
