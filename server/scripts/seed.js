@@ -19,7 +19,7 @@ var counter = 0;
 for (var j = 0; j < 8; j++) {
   for (var i = 0; i < 6; i++) {
     while (counter < 5000) {
-      var insertStatement = `INSERT INTO reviews(id, name, stars, date, review, image, title, avatar, foundThisHelpful)
+      var insertStatement = `INSERT INTO reviews(page, name, stars, date, review, image, title, avatar, foundThisHelpful)
       VALUES(${getRandomInt(
         101
       )}, '${faker.name.firstName()} ${faker.name.lastName()}', '${getRandomInt(

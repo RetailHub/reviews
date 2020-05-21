@@ -5,7 +5,8 @@ CREATE DATABASE reviews;
 USE reviews;
 
 CREATE TABLE reviews (
-  id int,
+  id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  page int,
   name varchar(50),
   stars int,
   date varchar(50),

@@ -44,7 +44,7 @@
     "seed": "node server/scripts/seed.js ",
     "watch": "webpack --watch",
     "build": "webpack --config webpack.config.js",
-    "start:dev": "node server",
+    "start:dev": "nodemon server",
     "test": "jest"
   },
   "author": "",
