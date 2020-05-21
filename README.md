@@ -60,5 +60,5 @@ npm run build
 |-----------| --------------------------- | ---------------------------- |
 | **POST**  |     /api/addReview/         |  CREATE a new item into DB   |
 | **GET**   |     /api/allReviews/?={id}  |  READ data and return data   |
-| **PATCH** |     /api/allReviews/        |  UPDATE item with new image  |
+| **PATCH** |     /api/allReviews/        |  UPDATE item with new review |
 | **DELETE**|     /api/allReviews/        |  DELETE item based on ID     |
