@@ -9,16 +9,18 @@ const getRandomIntZero = (max) => {
   return Math.floor(Math.random() * Math.floor(max));
 };
 
-const writeReviews = fs.createWriteStream('reviews.csv');
-writeReviews.write('page | name | stars | country | date | review | image | title | foundThisHelpful | avatar\n', 'utf8');
+const writeReviews = fs.createWriteStream('./data/reviews.csv');
+writeReviews.write('id|page|name|stars|country|date|review|image|title|foundThisHelpful|avatar\n', 'utf8');
 
 function writeTenMillionUsers(writer, encoding, callback) {
-  let i = 10000000;
+  let i = 75000000;
   let id = 0;
   function write() {
     let ok = true;
     do {
       i -= 1;
+      id += 1;
+      const reviewId = id;
       const page = getRandomInt(10000000);
       const name = `${faker.name.firstName()} ${faker.name.lastName()}`;
       const stars = getRandomIntZero(21);
@@ -29,7 +31,7 @@ function writeTenMillionUsers(writer, encoding, callback) {
       const title = `${faker.lorem.sentence()}`;
       const foundThisHelpful = `${getRandomInt(86)}`;
       const avatar = `${getRandomInt(86)}`;
-      const data = `${page} | ${name} | ${stars} | ${country} | ${date} | ${review} | ${image} | ${title} | ${foundThisHelpful} | ${avatar}\n`;
+      const data = `${id}|${page}|${name}|${stars}|${country}|${date}|${review}|${image}|${title}|${foundThisHelpful}|${avatar}\n`;
       if (i === 0) {
         writer.write(data, encoding, callback);
       } else {

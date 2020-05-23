@@ -6,6 +6,7 @@
   "dependencies": {
     "babel-preset-airbnb": "^5.0.0",
     "body-parser": "^1.19.0",
+    "cassandra-driver": "^4.5.2",
     "classnames": "^2.2.6",
     "express": "^4.17.1",
     "faker": "^4.1.0",
@@ -48,7 +49,10 @@
     "watch": "webpack --watch",
     "build": "webpack --config webpack.config.js",
     "start:dev": "nodemon server",
-    "test": "jest"
+    "test": "jest",
+    "createData": "node ./data/dataGenerator.js",
+    "seedC": "node ./database/cassandra/index.js",
+    "seedPost": "node ./database/postgresql/index.js"
   },
   "author": "",
   "license": "ISC"
