@@ -12,7 +12,7 @@ pool.connect()
     console.log('connected to postgres database')
   })
   .then(() => {
-    pool.query('COPY reviews FROM \'reviews.csv' DELIMITER \',\' CSV HEADER;')
+    pool.query('COPY reviews FROM \'reviews.csv\' DELIMITER \',\' CSV HEADER;')
   })
   .then(() => {
     console.log('finished seeding')

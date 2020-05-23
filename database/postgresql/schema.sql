@@ -5,7 +5,7 @@ CREATE DATABASE sdcreviews;
 \c sdcreviews;
 
 CREATE TABLE reviews (
-  ID SERIAL PRIMARY KEY,
+  reviewId int PRIMARY KEY,
   page int,
   name varchar(50),
   stars int,
