@@ -13,7 +13,7 @@ const writeReviews = fs.createWriteStream('./data/reviews.csv');
 writeReviews.write('id|page|name|stars|country|date|review|image|title|foundThisHelpful|avatar\n', 'utf8');
 
 function writeTenMillionUsers(writer, encoding, callback) {
-  let i = 75000000;
+  let i = 100000000;
   let id = 0;
   function write() {
     let ok = true;
