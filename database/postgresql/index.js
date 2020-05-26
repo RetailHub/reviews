@@ -2,9 +2,10 @@ const { Pool } = require('pg');
 
 const pool = new Pool({
   host: 'localhost',
-  user: 'B-Hamp',
+  user: 'bhamp',
   password: '',
-  port: 3004,
+  database: 'sdcreviews',
+  port: 5432,
 })
 
 pool.connect()
@@ -12,15 +13,13 @@ pool.connect()
     console.log('connected to postgres database')
   })
   .then(() => {
-    pool.query('COPY reviews FROM \'reviews.csv\' DELIMITER \',\' CSV HEADER;')
-  })
-  .then(() => {
-    console.log('finished seeding')
+    pool.query('COPY reviews FROM \'/Users/bhamp/hrr45/sdc/reviews/data/reviews.csv\' DELIMITER \'|\' CSV HEADER;')
+    .then(() => {
+      console.log('finished seeding')
+    })
   })
   .catch((err) => {
     if (err) {
       console.error(err)
     }
   })
-
-pool.end().then(() => console.log('pool has ended'))
