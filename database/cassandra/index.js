@@ -27,8 +27,9 @@ client.connect()
             title TEXT,
             avatar INT,
             foundThisHelpful INT,
-            Primary Key (reviewId)
-          )`).then(() => {
+            Primary Key (page, reviewId)
+          )WITH CLUSTERING ORDER BY (reviewId DESC) AND
+          compaction = { 'class' :  'LeveledCompactionStrategy'  }`).then(() => {
             console.log('table created')
          })
       })

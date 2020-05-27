@@ -18,6 +18,8 @@ CREATE TABLE reviews (
   foundThisHelpful int
 );
 
+CREATE INDEX ON reviews (page);
+
 --  Execute this file from the command line by typing:
 --    mysql -u <USER> < schema.sql
 --    OR
