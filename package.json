@@ -51,7 +51,8 @@
     "start:dev": "nodemon server",
     "test": "jest",
     "createData": "node ./data/dataGenerator.js",
-    "seedC": "node ./database/cassandra/index.js",
+    "startCass": "node ./database/cassandra/index.js",
+    "seedC": "cqlsh -k reviewdata -e \"COPY reviewdata.reviews (reviewId, page, name, stars, country, date, review, image, title, avatar, foundThisHelpful) FROM '/Users/bhamp/hrr45/sdc/reviews/data/reviews.csv' WITH DELIMITER = '|' AND HEADER = TRUE\"",
     "seedPost": "node ./database/postgresql/index.js"
   },
   "author": "",
