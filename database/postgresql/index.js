@@ -41,7 +41,7 @@ module.exports = {
     createReview(data, res) {
         const {reviewid, page, name, stars, country, date, review, image, title, avatar, foundthishelpful} = data;
         console.log(country);
-        var insertStatement = `INSERT INTO reviews (reviewid, page, name, stars, country, date, review, image, title, avatar, foundthishelpful) VALUES ( ${reviewid}, ${page}, '${name}', ${stars}, '${country}', '${date}', '${review}', '${image}', '${title}', ${avatar}, ${foundthishelpful})`;
+        var insertStatement = `INSERT INTO reviews (reviewid, page, name, stars, country, date, review, image, title, avatar, foundthishelpful) VALUES ( ${reviewid}, ${page}, '${name}', ${stars}, '${country}', '${date}', '${review}', '${image}', '${title}', ${avatar}, ${foundthishelpful}) ON CONFLICT (reviewid) DO NOTHING`;
         db.none(insertStatement)
             .then(() => {
                 res.status(200).send('Data Stored');

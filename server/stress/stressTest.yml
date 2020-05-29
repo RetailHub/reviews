@@ -1,0 +1,50 @@
+config:
+  target: "http://localhost:3004"
+  processor: "./stressData.js"
+  phases:
+    - duration: 10
+      arrivalRate: 1
+      name: "Warm up"
+    - pause: 20
+    - duration: 30
+      arrivalRate: 1
+      rampTo: 10
+      maxVusers: 10
+      name: "10 users"
+    - pause: 30
+    - duration: 30
+      arrivalRate: 10
+      rampTo: 100
+      maxVusers: 100
+      name: "100 users"
+    - pause: 60
+    - duration: 180
+      arrivalRate: 100
+      rampTo: 1000
+      maxVusers: 1000
+      name: "Sustained max load at 1K"
+scenarios:
+  - name: "Get"
+    weight: 10
+    flow:
+      - function: "getRandomPage"
+      - get:
+          url: "/?={id}"
+  - name: "Post"
+    weight: 1
+    flow:
+      - function: "generateRandomData"
+      - post:
+          url: "/api/addreview/"
+          json: 
+            reviewid: "{{ reviewid }}"
+            page: "{{ page }}"
+            name: "{{ name }}"
+            stars: "{{ stars }}"
+            country: "{{ country }}"
+            date: "{{ date }}"
+            review: "{{ review }}"
+            image: "{{ image }}"
+            title: "{{ title }}"
+            foundthishelpful: "{{ foundthishelpful }}"
+            avatar: "{{ avatar }}"

@@ -1,6 +1,8 @@
+require('newrelic');
 const express = require("express");
 const bodyParser = require("body-parser");
 const db = require("../database/postgresql");
+
 
 const app = express();
 const PORT = 3004;
