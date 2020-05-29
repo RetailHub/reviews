@@ -1,6 +1,6 @@
 const express = require("express");
 const bodyParser = require("body-parser");
-const db = require("../database");
+const db = require("../database/postgresql");
 
 const app = express();
 const PORT = 3004;
@@ -14,29 +14,41 @@ app.listen(PORT, () => {
   console.log(`listening on port ${PORT}`);
 });
 
+// app.get("/api/allreviews/", (req, res) => {
+//   if (req._parsedOriginalUrl.search) {
+//     var arr = req._parsedOriginalUrl.search.split("=");
+// console.log(req._parsedOriginalUrl.search);
+//   }
+//    console.log('id server: ', arr[1]);
+//   if (arr) {
+//     db.getReviews(arr[1], (err, data) => {
+//       if (err) {
+//         res.status(500).send("Something Broke!");
+//       } else {
+//         res.json(data);
+//       }
+//     });
+//   } else {
+//     db.getReviews(null, (err, data) => {
+//       if (err) {
+//         res.status(500).send("Something Broke!");
+//       } else {
+//         res.json(data);
+//       }
+//     });
+//   }
+// });
+
 app.get("/api/allreviews/", (req, res) => {
   if (req._parsedOriginalUrl.search) {
     var arr = req._parsedOriginalUrl.search.split("=");
-console.log(req._parsedOriginalUrl.search);
   }
-   console.log('id server: ', arr[1]);
-  if (arr) {
-    db.getAllReviews(arr[1], (err, data) => {
-      if (err) {
-        res.status(500).send("Something Broke!");
-      } else {
-        res.json(data);
-      }
-    });
-  } else {
-    db.getAllReviews(null, (err, data) => {
-      if (err) {
-        res.status(500).send("Something Broke!");
-      } else {
-        res.json(data);
-      }
-    });
-  }
+    db.getReviews(arr[1], res);
+});
+
+
+app.post("/api/addreview/", (req, res) => {
+  db.createReview(req.body, res);
 });
 
 app.delete("/api/allreviews/", (req, res) => {
@@ -49,17 +61,6 @@ app.delete("/api/allreviews/", (req, res) => {
       }
     });
   }
-});
-
-app.post("/api/addReview/", (req, res) => {
-  db.createReview(req.body, (err, data) => {
-    console.log('This is the error --------', err)
-    if (err) {
-      res.status(500).send("Something Broke!");
-    } else {
-      res.status(200).json(data);
-    }
-  });
 });
 
 app.patch("/api/patchreview/", (req, res) => {
