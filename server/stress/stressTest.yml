@@ -25,7 +25,7 @@ config:
       name: "Sustained max load at 1K"
 scenarios:
   - name: "Get"
-    weight: 10
+    weight: 10 
     flow:
       - function: "getRandomPage"
       - get:
