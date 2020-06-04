@@ -1,13 +1,3 @@
-// const { Pool } = require('pg');
-
-// const pool = new Pool({
-//   host: 'localhost',
-//   user: 'bhamp',
-//   password: '',
-//   database: 'sdcreviews',
-//   port: 5432,
-// })
-
 var bluebird = require('bluebird');
 
 const options = {
@@ -19,18 +9,24 @@ var pgp = require('pg-promise')(options)
 const connection = {
   host: 'localhost',
   user: 'bhamp',
-  password: '',
+  password: 'bhamp',
   database: 'sdcreviews',
   port: 5432,
+  keepAlive: true,
+  max: 30000
 }
 
 var db = pgp(connection)
 
 module.exports = {
     getReviews(req, res) {
-        //console.log('!!!!!!!!!!!!!!!!!!', req)
         db.many(`SELECT * FROM reviews WHERE page=${req}`)
             .then((results) => {
+            results.forEach((result) => {
+                result.name = result.name.replace(/#/g, "'");
+                result.country = result.country.replace(/#/g, "'")
+            })
+                console.log(results)
             res.status(200).json(results);
             })
             .catch((err) => {
@@ -39,8 +35,9 @@ module.exports = {
     },
 
     createReview(data, res) {
+        data.name = data.name.replace(/'/g, '#');
+        data.country = data.country.replace(/'/g, '#');
         const {reviewid, page, name, stars, country, date, review, image, title, avatar, foundthishelpful} = data;
-        console.log(country);
         var insertStatement = `INSERT INTO reviews (reviewid, page, name, stars, country, date, review, image, title, avatar, foundthishelpful) VALUES ( ${reviewid}, ${page}, '${name}', ${stars}, '${country}', '${date}', '${review}', '${image}', '${title}', ${avatar}, ${foundthishelpful}) ON CONFLICT (reviewid) DO NOTHING`;
         db.none(insertStatement)
             .then(() => {

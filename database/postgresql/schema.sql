@@ -1,4 +1,4 @@
-DROP DATABASE IF EXISTS reviews;
+DROP DATABASE IF EXISTS sdcreviews;
 
 CREATE DATABASE sdcreviews;
 
